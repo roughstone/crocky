@@ -14,9 +14,35 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/bg');
 });
 
-Auth::routes();
+Route::get('/{locale}', function ($locale) {
+    return view('layouts.app');
+})->middleware('locale');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Auth routes
+Route::get('/{locale}/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/{locale}/login', 'Auth\LoginController@login');
+Route::post('/{locale}/logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('/{locale}/password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
+Route::post('/{locale}/password/confirm', 'Auth\ConfirmPasswordController@confirm');
+Route::post('/{locale}/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('/{locale}/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('/{locale}/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+Route::get('/{locale}/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::get('/{locale}/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('/{locale}/register', 'Auth\RegisterController@register');
+
+
+Route::get('/{locale}/home', 'HomeController@index')->name('home');
+
+
+// Companies routes
+Route::get('/{locale}/companies', 'CompanyController@index');
+
+// Goods routes
+Route::get('/{locale}/goods', 'GoodsController@index');
+
+
+Route::get('/app/{locale}/{path?}/', 'HomeController@index')->middleware(['auth']);

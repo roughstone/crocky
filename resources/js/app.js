@@ -6,11 +6,9 @@
 
 require('./bootstrap');
 
-import Main from "./Layouts/Main";
-import ReactDOM from "react-dom";
-import React from "react";
-if (document.getElementById("main")) {
-    ReactDOM.render(<Main/>, document.getElementById("main"));
-}
+const processInclude = require('./util');
 
-/* ReactDOM.render(<App auth={document.getElementById("app").getAttribute('auth')}/>, document.getElementById("app")); */
+// load files
+(function () {
+    processInclude(require('./components/nav'));
+}());
