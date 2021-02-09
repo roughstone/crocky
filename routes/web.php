@@ -34,15 +34,17 @@ Route::get('/{locale}/password/reset/{token}', 'Auth\ResetPasswordController@sho
 Route::get('/{locale}/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('/{locale}/register', 'Auth\RegisterController@register');
 
-
 Route::get('/{locale}/home', 'HomeController@index')->name('home');
 
 
 // Companies routes
 Route::get('/{locale}/companies', 'CompanyController@index');
+Route::post('/{locale}/companies', 'CompanyController@store');
+Route::get('/{locale}/companies/{company}', 'CompanyController@show');
+Route::delete('/{locale}/companies/{company}/delete', 'CompanyController@destroy');
 
 // Goods routes
 Route::get('/{locale}/goods', 'GoodsController@index');
 
 
-Route::get('/app/{locale}/{path?}/', 'HomeController@index')->middleware(['auth']);
+Route::get('/app/{locale}/{path1?}/{path2?}/{path3?}/{path4?}', 'HomeController@index')->middleware(['auth', 'locale']);

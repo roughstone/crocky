@@ -11,4 +11,5 @@ const processInclude = require('./util');
 // load files
 (function () {
     processInclude(require('./components/nav'));
+    processInclude(require('./pages/companies'));
 }());

@@ -1,33 +1,29 @@
 <div class="card">
     <div class="card-header">
-        Companies
-        <a href="" class="nav-link d-inline float-right" data-toggle="modal" data-target="#exampleModalCenter">
-            <i class="far fa-plus-square"></i> Add new
+        <h3 class="d-inline">@lang('companies.companies')</h3>
+        <a href="" class="nav-link d-inline float-right" data-toggle="modal" data-target="#company-modal">
+            <i class="far fa-plus-square"></i> @lang('companies.add_company')
         </a>
     </div>
     <div class="card-body">
-        <table class="table table-striped">
+        <table id="companies-table" class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col" colspan="1">#</th>
-                    <th scope="col" colspan="4">Name</th>
-                    <th scope="col" colspan="4">Type</th>
-                    <th scope="col" colspan="1">Edit</th>
-                    <th scope="col" colspan="1">Delete</th>
+                    <th scope="col" style="width: 10%">#</th>
+                    <th scope="col" style="width: 35%">@lang('companies.name')</th>
+                    <th scope="col" style="width: 35%">@lang('companies.type')</th>
+                    <th class="text-center" scope="col" style="width: 20%">@lang('companies.actions')</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row" colspan="1">1</th>
-                    <td colspan="4">Mark</td>
-                    <td colspan="4">Otto</td>
-                    <td colspan="1">Otto</td>
-                    <td colspan="1">@mdo</td>
-                </tr>
+                @foreach ($companies as $company)
+                    @include('pages.companies.company_row', ['company' => $company])
+                @endforeach
             </tbody>
             </table>
     </div>
     <div class="card-footer">
 
     </div>
+    @include('pages.companies.modal')
 </div>

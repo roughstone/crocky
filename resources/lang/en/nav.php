@@ -15,6 +15,6 @@ return [
     'balance' => 'BALANCE',
     'balance_by_firms' => 'BALANCE BY FIRMS',
     'deals' => 'DEALS',
-    'payments' => 'PAYMENTS'
-    'goods' => 'GOODS'
+    'payments' => 'PAYMENTS',
+    'goods' => 'GOODS',
 ];

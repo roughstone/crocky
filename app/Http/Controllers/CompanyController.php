@@ -8,13 +8,24 @@ use Illuminate\Http\Request;
 class CompanyController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth', 'locale']);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('pages.companies.index');
+        $companies = Company::all();
+        return view('pages.companies.index', ['companies' => $companies]);
     }
 
     /**
@@ -25,7 +36,10 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $company = new Company($data);
+        $company->save();
+        return view('pages.companies.company_row', ['company' => $company]);
     }
 
     /**
@@ -34,9 +48,9 @@ class CompanyController extends Controller
      * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company)
+    public function show($locale, Company $company)
     {
-        //
+        return view('pages.companies.show', ['company' => $company]);
     }
 
     /**
@@ -57,8 +71,8 @@ class CompanyController extends Controller
      * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company)
+    public function destroy($locale, Company $company)
     {
-        //
+        $company->delete();
     }
 }
